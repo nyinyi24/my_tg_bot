@@ -10,11 +10,10 @@ client = openai.OpenAI(
     api_key=os.getenv("GEMINI_API_KEY") 
 )
 
-# ဒီမှာ argument (၃) ခု ဖြစ်အောင် history ကိုပါ ထည့်ပေးလိုက်ပါပြီ
 async def generate_content(prompt, tone, history=None):
     try:
         response = client.chat.completions.create(
-            model="deepseek-v3", 
+            model="deepseek-v3.2", 
             messages=[
                 {"role": "system", "content": f"မင်္ဂလာပါ။ သင်သည် ကျွမ်းကျင်သော Content Writer တစ်ဦးဖြစ်သည်။ စာသားများကို {tone} tone ဖြင့် ရေးသားပေးပါ။"},
                 {"role": "user", "content": prompt}
