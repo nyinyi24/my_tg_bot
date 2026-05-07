@@ -11,7 +11,7 @@ SYSTEM_INSTRUCTION = (
 
 async def generate_content(prompt_text, content_type, tone):
     model = genai.GenerativeModel(
-        model_name="gemini-3.1-flash-lite", 
+        model_name="models/gemini-3.1-flash-lite", 
         system_instruction=SYSTEM_INSTRUCTION
     )
     
