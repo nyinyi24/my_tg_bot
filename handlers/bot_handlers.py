@@ -35,9 +35,9 @@ async def cmd_help(message: types.Message):
         "💡 **သိကောင်းစရာများ**\n"
         "• Script တစ်ခါထုတ်လျှင် Credit (၁) ခု ကုန်ဆုံးပါမည်။\n"
         "• အခမဲ့ Credit ကုန်ဆုံးပါက Admin ထံတွင် ထပ်မံဝယ်ယူနိုင်ပါသည်။\n\n"
-        "🆘 အကူအညီလိုအပ်ပါက - @independence_N"
+        "🆘 အကူအညီလိုအပ်ပါက - [Admin](https://t.me/independence_N)"
     )
-    await message.answer(help_text)
+    await message.answer(help_text, parse_mode="Markdown")
 
 async def check_credits_callback(callback_query: types.CallbackQuery):
     user_id = callback_query.from_user.id
@@ -87,9 +87,9 @@ async def process_tone_callback(callback_query: types.CallbackQuery, state: FSMC
             f"✨ **သင့်အတွက် ရေးသားပေးထားသော စာသား:**\n\n{generated_text}\n\n"
             f"💰 လက်ကျန် Credit: {new_credits}\n"
             f"━━━━━━━━━━━━━━━\n"
-            f"🆘 အကူအညီလိုအပ်ပါက သို့မဟုတ် Credit ဝယ်ယူရန် - @independence_N"
+            f"🆘 အကူအညီလိုအပ်ပါက သို့မဟုတ် Credit ဝယ်ယူရန် - [Admin](https://t.me/independence_N)"
         )
-        await callback_query.message.answer(response_text)
+        await callback_query.message.answer(response_text, parse_mode="Markdown")
         await processing_msg.delete()
     except Exception as e:
         await callback_query.message.answer(f"❌ Error: {str(e)}")
