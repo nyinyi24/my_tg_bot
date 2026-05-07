@@ -1,22 +1,25 @@
-import google.generativeai as genai
-from config import GEMINI_API_KEY
+import openai
+import os
+from dotenv import load_dotenv
 
-genai.configure(api_key=GEMINI_API_KEY)
+load_dotenv()
 
-SYSTEM_INSTRUCTION = (
-    "မင်းက မြန်မာဘာသာစကား ကျွမ်းကျင်တဲ့ Social Media Marketing Expert တစ်ယောက်ဖြစ်တယ်။ "
-    "စာသားတွေကို ဆွဲဆောင်မှုရှိအောင်၊ Emoji လေးတွေပါအောင်၊ Hook, Body နဲ့ Call to Action (CTA) ပါဝင်အောင် ရေးပေးပါ။ "
-    "မြန်မာလိုပဲ ပြန်ဖြေပေးပါ။"
+# Agent Router ရဲ့ Configuration
+client = openai.OpenAI(
+    base_url="https://agentrouter.org/v1", 
+    api_key=os.getenv("GEMINI_API_KEY") 
 )
 
-async def generate_content(prompt_text, content_type, tone):
-    # Gemini 2.0 Flash-Lite Version ကို အသုံးပြုထားပါသည်
-    model = genai.GenerativeModel(
-        model_name="gemini-2.5-flash-lite", 
-        system_instruction=SYSTEM_INSTRUCTION
-    )
-    
-    full_prompt = f"Content Type: {content_type}\nTone: {tone}\nTopic: {prompt_text}\n\nအထက်ပါ အကြောင်းအရာအတွက် ဆွဲဆောင်မှုရှိသော စာသားကို ရေးပေးပါ။"
-    
-    response = model.generate_content(full_prompt)
-    return response.text
+async def generate_content(prompt, tone):
+    try:
+        response = client.chat.completions.create(
+            model="deepseek-v3", 
+            messages=[
+                {"role": "system", "content": f"မင်္ဂလာပါ။ သင်သည် ကျွမ်းကျင်သော Content Writer တစ်ဦးဖြစ်သည်။ စာသားများကို {tone} tone ဖြင့် ရေးသားပေးပါ။"},
+                {"role": "user", "content": prompt}
+            ]
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        print(f"Error: {e}")
+        return "ခေတ္တစောင့်ဆိုင်းပေးပါ။ AI နှင့် ချိတ်ဆက်ရာတွင် အခက်အခဲရှိနေပါသည်။"

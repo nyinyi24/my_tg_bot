@@ -1,4 +1,4 @@
-# Advanced Telegram AI Copywriter Bot
+# Advanced Telegram AI Contentywriter Bot
 
 ဒီ Bot ဟာ Google Gemini AI ကို အသုံးပြုပြီး Social Media Post Script တွေနဲ့ Channel ကြော်ငြာစာသားတွေကို ရေးသားပေးနိုင်တဲ့ Telegram Bot တစ်ခု ဖြစ်ပါတယ်။ aiogram framework (version 2.x) ကို အသုံးပြုထားပြီး SQLite database နဲ့ Credit စနစ်ကို ထိန်းချုပ်ထားပါတယ်။
 
